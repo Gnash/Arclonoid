@@ -13,7 +13,7 @@ GameObject:
   - 114: {fileID: 11465210}
   - 61: {fileID: 6196666}
   - 82: {fileID: 8257542}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Paddle
   m_TagString: Paddle
   m_Icon: {fileID: 0}

@@ -2101,6 +2101,10 @@ Prefab:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 11419524, guid: 0c003497bd03ec9449e8abd0413de105, type: 2}
+      propertyPath: gameOverText
+      value: 
+      objectReference: {fileID: 1261465060}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0c003497bd03ec9449e8abd0413de105, type: 2}
   m_IsPrefabParent: 0
@@ -3673,6 +3677,12 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e22cbf0abb38489478cacb1c2e0aebc4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &1261465060 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11405606, guid: 29ab945758288e04cb98239ce2d3eaf7,
+    type: 2}
+  m_PrefabInternal: {fileID: 381922671}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!224 &1265039196 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22468986, guid: 29ab945758288e04cb98239ce2d3eaf7,

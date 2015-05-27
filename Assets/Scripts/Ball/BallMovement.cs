@@ -13,6 +13,9 @@ public class BallMovement : MonoBehaviour {
 
 	private Vector2 lastDirection;
 	private Vector2 startDirection;
+	private Vector2 currentMovement;
+
+	private Vector3 hitBrickPosition;
 
 	void Awake() {
 		lastDirection = new Vector2 (0.5f, 1).normalized;
@@ -26,10 +29,12 @@ public class BallMovement : MonoBehaviour {
 
 	void Update() {
 		updateVelocity ();
+		hitBrickPosition = Vector3.zero;
 	}
 
 	private void updateVelocity() {
 		rigidBody.velocity = rigidBody.velocity.normalized * speed;
+		currentMovement = rigidBody.velocity;
 	}
 
 	public void setVelocity(Vector2 velocity) {
@@ -37,18 +42,48 @@ public class BallMovement : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D collision) {
-		if (collision.gameObject.name != "Paddle") {
-			return;
-		}
 		if (stuckInPaddle) {
 			return;
 		}
+		if (collision.gameObject.name == "Paddle") {
+			handlePaddleCollision (collision);
+		} else if (collision.gameObject.tag == "Brick") {
+			handleBrickCollision(collision);
+		}
+	}
+
+	private void handlePaddleCollision(Collision2D collision) {
 		increaseSpeed ();
 		stuckInPaddle = true;
 		float x = hitFactor (transform.position, collision.transform.position, collision.collider.bounds.size.x);
 		if (rigidBody && rigidBody.velocity != Vector2.zero) {
 			rigidBody.velocity = new Vector2 (x, up).normalized * speed;
 		}
+	}
+
+	private void handleBrickCollision(Collision2D collision) {
+		Vector3 collidingBrickPosition = collision.gameObject.transform.position;
+		if (hitBrickPosition == Vector3.zero) {
+			hitBrickPosition = collidingBrickPosition;
+		} else if (collidingBrickPosition != hitBrickPosition) {
+			if (Mathf.Abs(collidingBrickPosition.x - hitBrickPosition.x) < Mathf.Epsilon) {
+				invertYDirection();
+				Debug.Log("InvertY");
+			} else if (Mathf.Abs(collidingBrickPosition.y - hitBrickPosition.y) < Mathf.Epsilon) {
+				invertXDirection();
+				Debug.Log("InvertX");
+			}
+		}
+	}
+	
+	private void invertYDirection() {
+		lastDirection.y *= -1;
+		setVelocity (lastDirection);
+	}
+	
+	private void invertXDirection() {
+		lastDirection.x *= -1;
+		setVelocity (lastDirection);
 	}
 
 	private void increaseSpeed() {

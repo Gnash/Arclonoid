@@ -26,11 +26,11 @@ TagManager:
   - UI
   - 
   - 
-  - Bombs
-  - Player
-  - Enemies
-  - Pickups
-  - Ground
+  - Paddle
+  - Balls
+  - Bricks
+  - Walls
+  - Powerups
   - 
   - 
   - 

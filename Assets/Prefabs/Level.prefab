@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21279708}
   - 61: {fileID: 6102894}
   - 114: {fileID: 11495520}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BottomWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ GameObject:
   - 4: {fileID: 455470}
   - 212: {fileID: 21235288}
   - 61: {fileID: 6194910}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - 4: {fileID: 443014}
   - 114: {fileID: 11401912}
   - 82: {fileID: 8299414}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - 4: {fileID: 421158}
   - 212: {fileID: 21271364}
   - 61: {fileID: 6107520}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TopWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - 4: {fileID: 469574}
   - 212: {fileID: 21213028}
   - 61: {fileID: 6108074}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - 4: {fileID: 466020}
   - 212: {fileID: 21255870}
   - 114: {fileID: 11413938}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   - 92: {fileID: 9205696}
   - 124: {fileID: 12413042}
   - 81: {fileID: 8144850}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Level
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -395,6 +395,8 @@ MonoBehaviour:
   levelClearSound: {fileID: 8300000, guid: b824dd28faf417341baadf1cac56ff52, type: 3}
   gameOverSound: {fileID: 8300000, guid: d0205cb4f03b6a04ca8864ec3d373c49, type: 3}
   backgroundMusic: {fileID: 0}
+  powerups: []
+  gameOverText: {fileID: 0}
   ballPrefab: {fileID: 196786, guid: 76bca6cf1bf8d4449a9b8b333f0d9c16, type: 2}
   ballSpawn: {x: -1, y: 1.5, z: 0}
   currentLevel: 1

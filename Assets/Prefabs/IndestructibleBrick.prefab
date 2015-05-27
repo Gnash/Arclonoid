@@ -12,7 +12,7 @@ GameObject:
   - 61: {fileID: 6121324}
   - 114: {fileID: 11467724}
   - 82: {fileID: 8209498}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: IndestructibleBrick
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject ballPrefab;
 	public Vector3 ballSpawn;
 
+	private const uint START_LIVES = 3; 
 	public static uint livesRemaining = 3;
 	public uint currentLevel = 1;
 
@@ -141,7 +142,6 @@ public class GameManager : MonoBehaviour {
 
 	private void spawnPowerup(Vector3 position) {
 		float randomValue = Random.value;
-		Debug.Log (randomValue);
 		if (randomValue <= SPAWN_CHANCE) {
 			GameObject powerup = createRandomPowerup();
 			powerup.transform.position = position;
@@ -172,5 +172,9 @@ public class GameManager : MonoBehaviour {
 			clonedBallRight.GetComponent<BallMovement>().setVelocity(Quaternion.Euler(0, 0, -45) * originalVelocity);
 		}
 
+	}
+
+	public static void resetLives() {
+		livesRemaining = START_LIVES;
 	}
 }

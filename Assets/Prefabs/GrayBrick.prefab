@@ -12,7 +12,7 @@ GameObject:
   - 61: {fileID: 6190464}
   - 114: {fileID: 11425102}
   - 82: {fileID: 8274568}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GrayBrick
   m_TagString: Brick
   m_Icon: {fileID: 0}

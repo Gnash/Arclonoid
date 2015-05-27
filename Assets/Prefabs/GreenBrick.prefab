@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21294660}
   - 61: {fileID: 6192596}
   - 114: {fileID: 11492084}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GreenBrick
   m_TagString: Brick
   m_Icon: {fileID: 0}

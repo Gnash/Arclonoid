@@ -7,7 +7,6 @@ public abstract class Powerup : MonoBehaviour {
 
 	void Start() {
 		GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, -1) * 1.5f;
-		Debug.Log ("Test");
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
