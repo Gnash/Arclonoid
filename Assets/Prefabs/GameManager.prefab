@@ -114,6 +114,9 @@ MonoBehaviour:
   levelClearSound: {fileID: 8300000, guid: b824dd28faf417341baadf1cac56ff52, type: 3}
   gameOverSound: {fileID: 8300000, guid: d0205cb4f03b6a04ca8864ec3d373c49, type: 3}
   backgroundMusic: {fileID: 0}
+  powerups:
+  - {fileID: 139346, guid: b35629140eb78a74ba2dbd65be303f91, type: 2}
+  gameOverText: {fileID: 0}
   ballPrefab: {fileID: 196786, guid: 76bca6cf1bf8d4449a9b8b333f0d9c16, type: 2}
   ballSpawn: {x: -1, y: 1.5, z: 0}
   currentLevel: 1

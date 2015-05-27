@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
+	private const float SPAWN_CHANCE = 0.1f;
+
 	public static GameManager instance = null;
 
 	private static uint lastLevel = 3;
@@ -14,6 +16,8 @@ public class GameManager : MonoBehaviour {
 	public AudioClip levelClearSound;
 	public AudioClip gameOverSound;
 	public AudioClip backgroundMusic;
+
+	public GameObject[] powerups;
 
 	public Text gameOverText;
 
@@ -129,9 +133,24 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	
-	public void notifyBrickDestruction() {
+	public void notifyBrickDestruction(GameObject brick) {
 		playDestructionSound ();
+		spawnPowerup (brick.transform.position);
 		destroyedBrick = true;
+	}
+
+	private void spawnPowerup(Vector3 position) {
+		float randomValue = Random.value;
+		Debug.Log (randomValue);
+		if (randomValue <= SPAWN_CHANCE) {
+			GameObject powerup = createRandomPowerup();
+			powerup.transform.position = position;
+		}
+	}
+
+	private GameObject createRandomPowerup() {
+		int randomIndex = Mathf.RoundToInt(Random.value * (powerups.Length - 1));
+		return Instantiate(powerups [randomIndex]);
 	}
 		
 	private void playDestructionSound() {

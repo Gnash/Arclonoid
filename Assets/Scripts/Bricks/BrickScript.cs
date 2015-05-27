@@ -17,7 +17,7 @@ public class BrickScript : MonoBehaviour {
 	}
 
 	protected virtual void handleBallCollision() {		
-		GameManager.instance.notifyBrickDestruction ();
+		GameManager.instance.notifyBrickDestruction (gameObject);
 		Destroy (gameObject);
 	}
 }
