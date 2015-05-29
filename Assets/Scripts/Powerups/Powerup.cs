@@ -3,14 +3,14 @@ using System.Collections;
 
 public abstract class Powerup : MonoBehaviour {
 
-	public float speed = 1.5f;
+	public float dropSpeed = 1.5f;
 
 	void Start() {
-		GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, -1) * 1.5f;
+		GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, -1) * dropSpeed;
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.gameObject.name == "Paddle") {
+		if (other.gameObject.tag == "Paddle") {
 			applyPowerupToGameManager();
 			Destroy(gameObject);
 		}

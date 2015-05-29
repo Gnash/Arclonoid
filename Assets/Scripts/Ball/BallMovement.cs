@@ -3,7 +3,8 @@ using System.Collections;
 
 public class BallMovement : MonoBehaviour {
 
-	public float speed = 6;
+	public float spawnSpeed = 6;
+	public float currentSpeed;
 	public float speedIncrease = 0.2f;
 	public float freeRebounds = 10;
 	public float up = 0.5f;
@@ -23,6 +24,7 @@ public class BallMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		currentSpeed = spawnSpeed;
 		rigidBody = GetComponent<Rigidbody2D> ();
 		rigidBody.velocity = startDirection;
 	}
@@ -33,7 +35,7 @@ public class BallMovement : MonoBehaviour {
 	}
 
 	private void updateVelocity() {
-		rigidBody.velocity = rigidBody.velocity.normalized * speed;
+		rigidBody.velocity = rigidBody.velocity.normalized * currentSpeed;
 		currentMovement = rigidBody.velocity;
 	}
 
@@ -57,7 +59,7 @@ public class BallMovement : MonoBehaviour {
 		stuckInPaddle = true;
 		float x = hitFactor (transform.position, collision.transform.position, collision.collider.bounds.size.x);
 		if (rigidBody && rigidBody.velocity != Vector2.zero) {
-			rigidBody.velocity = new Vector2 (x, up).normalized * speed;
+			rigidBody.velocity = new Vector2 (x, up).normalized * currentSpeed;
 		}
 	}
 
@@ -77,19 +79,19 @@ public class BallMovement : MonoBehaviour {
 	}
 	
 	private void invertYDirection() {
-		lastDirection.y *= -1;
-		setVelocity (lastDirection);
+		currentMovement.y *= -1;
+		setVelocity (currentMovement);
 	}
 	
 	private void invertXDirection() {
-		lastDirection.x *= -1;
-		setVelocity (lastDirection);
+		currentMovement.x *= -1;
+		setVelocity (currentMovement);
 	}
 
 	private void increaseSpeed() {
 		reboundCount++;
 		if (reboundCount > freeRebounds) {
-			speed += speedIncrease;
+			currentSpeed += speedIncrease;
 		}
 	}
 
@@ -101,6 +103,10 @@ public class BallMovement : MonoBehaviour {
 		if (collision.gameObject.name == "Paddle") {
 			stuckInPaddle = false;
 		}
+	}
+
+	public void ResetSpeed() {
+		this.currentSpeed = spawnSpeed;
 	}
 
 	public void pause() {

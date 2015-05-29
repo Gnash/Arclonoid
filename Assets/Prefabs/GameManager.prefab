@@ -116,6 +116,7 @@ MonoBehaviour:
   backgroundMusic: {fileID: 0}
   powerups:
   - {fileID: 139346, guid: b35629140eb78a74ba2dbd65be303f91, type: 2}
+  - {fileID: 165454, guid: 87ea8e2ea311347408ddc3d59c977008, type: 2}
   gameOverText: {fileID: 0}
   ballPrefab: {fileID: 196786, guid: 76bca6cf1bf8d4449a9b8b333f0d9c16, type: 2}
   ballSpawn: {x: -1, y: 1.5, z: 0}

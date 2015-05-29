@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour {
 	public AudioClip backgroundMusic;
 
 	public GameObject[] powerups;
+	public GameObject smallPaddlePrefab;
+	public GameObject normalPaddlePrefab;
+	public GameObject largePaddlePrefab;
 
 	public Text gameOverText;
 
@@ -31,8 +34,11 @@ public class GameManager : MonoBehaviour {
 	private AudioSource audioSource;
 
 	private bool droppedBall = false;
+	private bool mustSpawnBall = false;
 	private bool destroyedBrick = false;
 	private bool gameOver = false;
+	private bool paddleIsShrunk = false;
+	private bool paddleIsGrown = false;
 
 
 	void Awake() {		
@@ -64,6 +70,10 @@ public class GameManager : MonoBehaviour {
 			handleDroppedBall();
 			droppedBall = false;
 		}
+		if (mustSpawnBall) {
+			spawnBall();
+			mustSpawnBall = false;
+		}
 		if (destroyedBrick) {
 			checkForLevelClear();
 			destroyedBrick = false;
@@ -76,6 +86,7 @@ public class GameManager : MonoBehaviour {
 	private void handleDroppedBall() {
 		GameObject[] balls = GameObject.FindGameObjectsWithTag ("Ball");
 		if (balls.Length == 0) {
+			resetPaddleSize();
 			loseLife();
 		}
 	}
@@ -88,7 +99,7 @@ public class GameManager : MonoBehaviour {
 		livesRemaining--;
 		if (livesRemaining > 0) {
 			audioSource.PlayOneShot (ballLossSound);
-			spawnBall();
+			mustSpawnBall = true;
 		} else {
 			pauseGame();
 			StartCoroutine(initiateGameOver());
@@ -171,7 +182,45 @@ public class GameManager : MonoBehaviour {
 			GameObject clonedBallRight = Instantiate(ball);
 			clonedBallRight.GetComponent<BallMovement>().setVelocity(Quaternion.Euler(0, 0, -45) * originalVelocity);
 		}
+	}
 
+	public void applySlowPowerup() {
+		GameObject[] balls = GameObject.FindGameObjectsWithTag ("Ball");
+		for (int i = 0; i < balls.Length; i++) {
+			GameObject ball = balls[i];
+			ball.GetComponent<BallMovement>().ResetSpeed();
+		}
+	}
+
+	public void ApplyGrowPowerup() {
+		if (paddleIsShrunk) {
+			resetPaddleSize();
+		} else {
+			replacePaddleWithPrefab(largePaddlePrefab);
+			paddleIsGrown = true;
+		}
+	}
+
+	public void ApplyShrinkPowerup() {
+		if (paddleIsGrown) {
+			resetPaddleSize();
+		} else {
+			replacePaddleWithPrefab(smallPaddlePrefab);
+			paddleIsShrunk = true;
+		}
+	}
+
+	private void resetPaddleSize() {
+		replacePaddleWithPrefab (normalPaddlePrefab);
+		paddleIsGrown = false;	
+		paddleIsShrunk = false;
+	}
+
+	private void replacePaddleWithPrefab(GameObject newPaddlePrefab) {
+		GameObject currentPaddle = GameObject.FindGameObjectWithTag ("Paddle");
+		GameObject newPaddle = Instantiate (newPaddlePrefab, currentPaddle.transform.position, Quaternion.identity) as GameObject;
+		currentPaddle.SetActive (false);
+		Destroy(currentPaddle);
 	}
 
 	public static void resetLives() {
