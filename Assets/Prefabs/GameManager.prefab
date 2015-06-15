@@ -115,8 +115,13 @@ MonoBehaviour:
   gameOverSound: {fileID: 8300000, guid: d0205cb4f03b6a04ca8864ec3d373c49, type: 3}
   backgroundMusic: {fileID: 0}
   powerups:
-  - {fileID: 139346, guid: b35629140eb78a74ba2dbd65be303f91, type: 2}
-  - {fileID: 165454, guid: 87ea8e2ea311347408ddc3d59c977008, type: 2}
+  - {fileID: 121882, guid: 87ea8e2ea311347408ddc3d59c977008, type: 2}
+  - {fileID: 130382, guid: 3d39b742f66fa314ba77fc0a04e72882, type: 2}
+  - {fileID: 178948, guid: 75609e8067da506459726610fbc3859f, type: 2}
+  - {fileID: 135498, guid: 070ce4fba04dc0840ab2e4f2cef05b4b, type: 2}
+  smallPaddlePrefab: {fileID: 139080, guid: 77d8e08465c4b9f45985b855b7d8aa14, type: 2}
+  normalPaddlePrefab: {fileID: 127738, guid: 9386108ed8101f546a5e9f4b576a2903, type: 2}
+  largePaddlePrefab: {fileID: 100754, guid: e81ffed3d0ab7924ba56e5345a1f9271, type: 2}
   gameOverText: {fileID: 0}
   ballPrefab: {fileID: 196786, guid: 76bca6cf1bf8d4449a9b8b333f0d9c16, type: 2}
   ballSpawn: {x: -1, y: 1.5, z: 0}

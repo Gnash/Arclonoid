@@ -57,3 +57,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Powerups
+    uniqueID: 3769858289
+    locked: 0
+  - name: Balls
+    uniqueID: 3619621097
+    locked: 0
