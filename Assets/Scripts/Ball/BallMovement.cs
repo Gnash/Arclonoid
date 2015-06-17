@@ -30,16 +30,16 @@ public class BallMovement : MonoBehaviour {
 	}
 
 	void Update() {
-		updateVelocity ();
+		UpdateVelocity ();
 		hitBrickPosition = Vector3.zero;
 	}
 
-	private void updateVelocity() {
+	private void UpdateVelocity() {
 		rigidBody.velocity = rigidBody.velocity.normalized * currentSpeed;
 		currentMovement = rigidBody.velocity;
 	}
 
-	public void setVelocity(Vector2 velocity) {
+	public void SetVelocity(Vector2 velocity) {
 		startDirection = velocity;
 	}
 
@@ -48,54 +48,54 @@ public class BallMovement : MonoBehaviour {
 			return;
 		}
 		if (collision.gameObject.name == "Paddle") {
-			handlePaddleCollision (collision);
+			HandlePaddleCollision (collision);
 		} else if (collision.gameObject.tag == "Brick") {
-			handleBrickCollision(collision);
+			HandleBrickCollision(collision);
 		}
 	}
 
-	private void handlePaddleCollision(Collision2D collision) {
-		increaseSpeed ();
+	private void HandlePaddleCollision(Collision2D collision) {
+		IncreaseSpeed ();
 		stuckInPaddle = true;
-		float x = hitFactor (transform.position, collision.transform.position, collision.collider.bounds.size.x);
+		float x = HitFactor (transform.position, collision.transform.position, collision.collider.bounds.size.x);
 		if (rigidBody && rigidBody.velocity != Vector2.zero) {
 			rigidBody.velocity = new Vector2 (x, up).normalized * currentSpeed;
 		}
 	}
 
-	private void handleBrickCollision(Collision2D collision) {
+	private void HandleBrickCollision(Collision2D collision) {
 		Vector3 collidingBrickPosition = collision.gameObject.transform.position;
 		if (hitBrickPosition == Vector3.zero) {
 			hitBrickPosition = collidingBrickPosition;
 		} else if (collidingBrickPosition != hitBrickPosition) {
 			if (Mathf.Abs(collidingBrickPosition.x - hitBrickPosition.x) < Mathf.Epsilon) {
-				invertYDirection();
+				InvertYDirection();
 				Debug.Log("InvertY");
 			} else if (Mathf.Abs(collidingBrickPosition.y - hitBrickPosition.y) < Mathf.Epsilon) {
-				invertXDirection();
+				InvertXDirection();
 				Debug.Log("InvertX");
 			}
 		}
 	}
 	
-	private void invertYDirection() {
+	private void InvertYDirection() {
 		currentMovement.y *= -1;
-		setVelocity (currentMovement);
+		SetVelocity (currentMovement);
 	}
 	
-	private void invertXDirection() {
+	private void InvertXDirection() {
 		currentMovement.x *= -1;
-		setVelocity (currentMovement);
+		SetVelocity (currentMovement);
 	}
 
-	private void increaseSpeed() {
+	private void IncreaseSpeed() {
 		reboundCount++;
 		if (reboundCount > freeRebounds) {
 			currentSpeed += speedIncrease;
 		}
 	}
 
-	private float hitFactor(Vector2 ballPos, Vector2 paddlePos, float paddleWidth) {
+	private float HitFactor(Vector2 ballPos, Vector2 paddlePos, float paddleWidth) {
 		return (ballPos.x - paddlePos.x) / paddleWidth;
 	}
 
@@ -109,14 +109,14 @@ public class BallMovement : MonoBehaviour {
 		this.currentSpeed = spawnSpeed;
 	}
 
-	public void pause() {
+	public void Pause() {
 		if (rigidBody) {
 			lastDirection = rigidBody.velocity.normalized;
 			rigidBody.velocity = Vector2.zero;
 		}
 	}
 
-	public void unpause() {
+	public void Unpause() {
 		if (rigidBody) {
 			rigidBody.velocity = lastDirection;
 		}

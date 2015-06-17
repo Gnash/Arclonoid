@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class TwoHitBrickScript : BrickScript {
@@ -17,13 +17,13 @@ public class TwoHitBrickScript : BrickScript {
 		spriteRenderer = GetComponent<SpriteRenderer> ();
 	}
 
-	protected override void handleBallCollision() {
+	protected override void HandleBallCollision() {
 		hitpoints--;
 		if (hitpoints > 0) {
 			audioSource.PlayOneShot(damageSound);
 			spriteRenderer.sprite = damagedSprite;
 		} else {
-			base.handleBallCollision();
+			base.HandleBallCollision();
 		}
 	}
 

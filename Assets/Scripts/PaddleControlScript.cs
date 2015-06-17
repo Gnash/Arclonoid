@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -32,27 +32,27 @@ public class PaddleControlScript : MonoBehaviour {
 		}
 		transform.position = new Vector3 (xMouse, 0, 0);
 		if (Input.GetKeyDown (KeyCode.Mouse0)) {
-			fireBall();
+			FireBall();
 		}
 	}
 
-	private void fireBall() {
+	private void FireBall() {
 		if (attachedBalls.Count > 0) {
 			GameObject ballToFire = attachedBalls[0];
-			ballToFire.GetComponent<BallMovement>().unpause();
+			ballToFire.GetComponent<BallMovement>().Unpause();
 			ballToFire.GetComponent<Collider2D>().enabled = true;
 			ballToFire.transform.parent = null;
 			attachedBalls.RemoveAt(0);
 		}
 	}
 
-	public void attachBall(GameObject ball) {
+	public void AttachBall(GameObject ball) {
 		ball.transform.parent = transform;
 		ball.transform.localPosition = new Vector3(0, 0.175f, 0);
 		ball.GetComponent<Collider2D> ().enabled = false;
 
 		BallMovement ballScript = ball.GetComponent<BallMovement> ();
-		ballScript.pause ();
+		ballScript.Pause ();
 
 		attachedBalls.Add (ball);
 	}

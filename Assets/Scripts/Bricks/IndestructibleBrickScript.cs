@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class IndestructibleBrickScript : BrickScript {
@@ -11,7 +11,7 @@ public class IndestructibleBrickScript : BrickScript {
 		audioSource = GetComponent<AudioSource>();
 	}
 
-	protected override void handleBallCollision() {
+	protected override void HandleBallCollision() {
 		audioSource.PlayOneShot (collisionSound);
 	}
 }

@@ -55,27 +55,27 @@ public class GameManager : MonoBehaviour {
 		Cursor.visible = false;
 		DontDestroyOnLoad (gameObject);
 		audioSource = GetComponent<AudioSource> ();
-		spawnBall ();
+		SpawnBall ();
 	}
 
-	public void spawnBall () {
+	public void SpawnBall () {
 		GameObject ball = Instantiate (ballPrefab);
 		GameObject paddle = GameObject.FindGameObjectWithTag ("Paddle");
-		paddle.GetComponent<PaddleControlScript> ().attachBall (ball);
+		paddle.GetComponent<PaddleControlScript> ().AttachBall (ball);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (droppedBall) {
-			handleDroppedBall();
+			HandleDroppedBall();
 			droppedBall = false;
 		}
 		if (mustSpawnBall) {
-			spawnBall();
+			SpawnBall();
 			mustSpawnBall = false;
 		}
 		if (destroyedBrick) {
-			checkForLevelClear();
+			CheckForLevelClear();
 			destroyedBrick = false;
 		}
 		if (gameOver && Input.GetKeyDown (KeyCode.Mouse0)) {
@@ -83,45 +83,41 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	private void handleDroppedBall() {
+	private void HandleDroppedBall() {
 		GameObject[] balls = GameObject.FindGameObjectsWithTag ("Ball");
 		if (balls.Length == 0) {
-			resetPaddleSize();
-			loseLife();
+			ResetPaddleSize();
+			LoseLife();
 		}
 	}
 
-	private void returnToMainScreen() {
-
-	}
-
-	private void loseLife() {
+	private void LoseLife() {
 		livesRemaining--;
 		if (livesRemaining > 0) {
 			audioSource.PlayOneShot (ballLossSound);
 			mustSpawnBall = true;
 		} else {
-			pauseGame();
-			StartCoroutine(initiateGameOver());
+			PauseGame();
+			StartCoroutine(InitiateGameOver());
 		}
 	}
 
-	private IEnumerator initiateGameOver() {
+	private IEnumerator InitiateGameOver() {
 		audioSource.PlayOneShot(gameOverSound);
 		yield return new WaitForSeconds (gameOverSound.length);
 		gameOverText.enabled = true;
 		gameOver = true;
 	}
 
-	private void checkForLevelClear() {
+	private void CheckForLevelClear() {
 		GameObject[] bricks = GameObject.FindGameObjectsWithTag ("Brick");
 		if (bricks.Length == 0) {
-			StartCoroutine(finishLevel());
+			StartCoroutine(FinishLevel());
 		}
 	}
 
-	private IEnumerator finishLevel() {
-		pauseGame ();
+	private IEnumerator FinishLevel() {
+		PauseGame ();
 		yield return new WaitForSeconds (destructionSound.length);
 		yield return new WaitForSeconds (0.3f);
 		audioSource.PlayOneShot(levelClearSound);
@@ -134,57 +130,57 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	private void pauseGame() {
+	private void PauseGame() {
 		GameObject[] balls = GameObject.FindGameObjectsWithTag ("Ball");
 		for (int i = 0; i < balls.Length; i++) {
 			GameObject ball = balls[i];
 			BallMovement script = ball.GetComponent<BallMovement>();
 			if (script != null) {
-				script.pause();
+				script.Pause();
 			}
 		}
 	}
 	
-	public void notifyBrickDestruction(GameObject brick) {
-		playDestructionSound ();
-		spawnPowerup (brick.transform.position);
+	public void NotifyBrickDestruction(GameObject brick) {
+		PlayDestructionSound ();
+		SpawnPowerup (brick.transform.position);
 		destroyedBrick = true;
 	}
 
-	private void spawnPowerup(Vector3 position) {
+	private void SpawnPowerup(Vector3 position) {
 		float randomValue = Random.value;
 		if (randomValue <= SPAWN_CHANCE) {
-			GameObject powerup = createRandomPowerup();
+			GameObject powerup = CreateRandomPowerup();
 			powerup.transform.position = position;
 		}
 	}
 
-	private GameObject createRandomPowerup() {
+	private GameObject CreateRandomPowerup() {
 		int randomIndex = Mathf.RoundToInt(Random.value * (powerups.Length - 1));
 		return Instantiate(powerups [randomIndex]);
 	}
 		
-	private void playDestructionSound() {
+	private void PlayDestructionSound() {
 		audioSource.PlayOneShot (destructionSound);
 	}
 
-	public void notifyBallLoss() {		
+	public void NotifyBallLoss() {		
 		droppedBall = true;
 	}
 
-	public void applyMultiplicationPowerup() {
+	public void ApplyMultiplicationPowerup() {
 		GameObject[] balls = GameObject.FindGameObjectsWithTag ("Ball");
 		for (int i = 0; i < balls.Length; i++) {
 			GameObject ball = balls[i];
 			Vector2 originalVelocity = ball.GetComponent<Rigidbody2D>().velocity;
 			GameObject clonedBallLeft = Instantiate(ball);
-			clonedBallLeft.GetComponent<BallMovement>().setVelocity(Quaternion.Euler(0, 0, 45) * originalVelocity);
+			clonedBallLeft.GetComponent<BallMovement>().SetVelocity(Quaternion.Euler(0, 0, 45) * originalVelocity);
 			GameObject clonedBallRight = Instantiate(ball);
-			clonedBallRight.GetComponent<BallMovement>().setVelocity(Quaternion.Euler(0, 0, -45) * originalVelocity);
+			clonedBallRight.GetComponent<BallMovement>().SetVelocity(Quaternion.Euler(0, 0, -45) * originalVelocity);
 		}
 	}
 
-	public void applySlowPowerup() {
+	public void ApplySlowPowerup() {
 		GameObject[] balls = GameObject.FindGameObjectsWithTag ("Ball");
 		for (int i = 0; i < balls.Length; i++) {
 			GameObject ball = balls[i];
@@ -194,36 +190,36 @@ public class GameManager : MonoBehaviour {
 
 	public void ApplyGrowPowerup() {
 		if (paddleIsShrunk) {
-			resetPaddleSize();
+			ResetPaddleSize();
 		} else {
-			replacePaddleWithPrefab(largePaddlePrefab);
+			ReplacePaddleWithPrefab(largePaddlePrefab);
 			paddleIsGrown = true;
 		}
 	}
 
 	public void ApplyShrinkPowerup() {
 		if (paddleIsGrown) {
-			resetPaddleSize();
+			ResetPaddleSize();
 		} else {
-			replacePaddleWithPrefab(smallPaddlePrefab);
+			ReplacePaddleWithPrefab(smallPaddlePrefab);
 			paddleIsShrunk = true;
 		}
 	}
 
-	private void resetPaddleSize() {
-		replacePaddleWithPrefab (normalPaddlePrefab);
+	private void ResetPaddleSize() {
+		ReplacePaddleWithPrefab (normalPaddlePrefab);
 		paddleIsGrown = false;	
 		paddleIsShrunk = false;
 	}
 
-	private void replacePaddleWithPrefab(GameObject newPaddlePrefab) {
+	private void ReplacePaddleWithPrefab(GameObject newPaddlePrefab) {
 		GameObject currentPaddle = GameObject.FindGameObjectWithTag ("Paddle");
 		GameObject newPaddle = Instantiate (newPaddlePrefab, currentPaddle.transform.position, Quaternion.identity) as GameObject;
 		currentPaddle.SetActive (false);
 		Destroy(currentPaddle);
 	}
 
-	public static void resetLives() {
+	public static void ResetLives() {
 		livesRemaining = START_LIVES;
 	}
 }

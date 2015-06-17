@@ -5,7 +5,7 @@ public class MainMenu : MonoBehaviour {
 
 	void Update() {
 		if (Input.GetKeyDown(KeyCode.Mouse0)) {
-			GameManager.resetLives();
+			GameManager.ResetLives();
 			Application.LoadLevel ("level_1");
 		}
 	}

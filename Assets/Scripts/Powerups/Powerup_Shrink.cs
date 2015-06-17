@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Powerup_Shrink : Powerup {
 	
-	protected override void applyPowerupToGameManager() {
+	protected override void ApplyPowerupToGameManager() {
 		GameManager.instance.ApplyShrinkPowerup ();
 	}
 }

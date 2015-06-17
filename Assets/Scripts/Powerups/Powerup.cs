@@ -11,10 +11,10 @@ public abstract class Powerup : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Paddle") {
-			applyPowerupToGameManager();
+			ApplyPowerupToGameManager();
 			Destroy(gameObject);
 		}
 	}
 
-	protected abstract void applyPowerupToGameManager();
+	protected abstract void ApplyPowerupToGameManager();
 }

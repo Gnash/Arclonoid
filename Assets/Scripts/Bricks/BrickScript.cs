@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class BrickScript : MonoBehaviour {
@@ -7,7 +7,7 @@ public class BrickScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision) {
 		if (!ballStuckInBrick) {
-			handleBallCollision ();
+			HandleBallCollision ();
 		}
 		ballStuckInBrick = true;
 	}
@@ -16,8 +16,8 @@ public class BrickScript : MonoBehaviour {
 		ballStuckInBrick = false;
 	}
 
-	protected virtual void handleBallCollision() {		
-		GameManager.instance.notifyBrickDestruction (gameObject);
+	protected virtual void HandleBallCollision() {		
+		GameManager.instance.NotifyBrickDestruction (gameObject);
 		Destroy (gameObject);
 	}
 }

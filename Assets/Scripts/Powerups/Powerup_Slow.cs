@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Powerup_Slow : Powerup {
 
-	protected override void applyPowerupToGameManager() {
-		GameManager.instance.applySlowPowerup ();
+	protected override void ApplyPowerupToGameManager() {
+		GameManager.instance.ApplySlowPowerup ();
 	}
 }
